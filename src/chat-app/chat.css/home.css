@@ -224,6 +224,10 @@ body,html{
     color: brown;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
+#togWholeStruc{
+    background-color: #7d8a9c ;
+}
+
 @media only screen and (min-width: 425px) and (max-width: 768px) {
     #root {
         width: 100%;
@@ -312,6 +316,5 @@ body,html{
     .sub{
         width: 100%;
     }
-
 
 }

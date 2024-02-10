@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState, useRef } from 'react';
-import {auth , firestore, database , storage} from '../firebase.js';
+import {auth , firestore , storage} from '../firebase.js';
 import {collection, onSnapshot, doc, updateDoc, addDoc, deleteDoc, query, orderBy, serverTimestamp} from 'firebase/firestore'
 import {AllUserContext} from '../contextFile/dataContext.js';
 import {ref, uploadBytes, getDownloadURL} from 'firebase/storage'
@@ -263,7 +263,7 @@ export const Chatroom = () => {
                 </div>):null)}
 
 
-                <div className='inputNSend'>
+                <div style ={combineId||state.groupId?{display:'flex'}:{display:'none'}} className='inputNSend'>
                     <input type='text' value={formValue} id ={state.mode?"togInputDark" : "togInputLight"} className='messageInput' 
                     onChange={(e) =>setFormValue(e.target.value) } placeholder='type message...'/>
 

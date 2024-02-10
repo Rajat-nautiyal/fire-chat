@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState,useContext} from 'react';
 import {Link} from 'react-router-dom';
+import {AllUserContext} from '../contextFile/dataContext.js';
 import {setDoc, collection, doc,updateDoc, serverTimestamp, arrayUnion } from 'firebase/firestore';
 import { createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import {auth, firestore,storage} from '../firebase'
@@ -11,6 +12,8 @@ import '../chat.css/Sign.css'
 import { MdLogin } from "react-icons/md";
 
 function SignUpAuth() {
+    const {allUserData,dispatch} = useContext(AllUserContext);
+
     const [userName, setUserName] = useState("");
     const [pic, setPic] = useState(null);
     const [email, setEmail] = useState("");
@@ -32,7 +35,23 @@ function SignUpAuth() {
                 user_id: uid,
                 }))
     }   
-
+        
+    const addByGoogle= async(photoUrl,displayName,uid)=>{
+            const userData = allUserData.find(u => u.user_id === uid)
+            if(userData){
+                navigate('/')
+            } else 
+                await setDoc(doc(firestore, "allUsers", uid),(allUsersRef, {
+                username: userName? userName.toLocaleLowerCase(): displayName.toLocaleLowerCase(),
+                originalUsername:userName? userName : displayName,
+                photoUrl:photoUrl?photoUrl:randomPic,
+                userCreatedAt: serverTimestamp(),
+                friends: [],
+                user_id: uid,
+                }))
+            
+        }
+    
     const addtoGroup= async(photoUrl,displayName,uid)=>{
         await updateDoc(doc(firestore, "groups", 'AenyHhj56yKLx6v2hMnt'), {
                 friends: arrayUnion(uid)
@@ -53,6 +72,7 @@ function SignUpAuth() {
                         // console.log(url)
                         addUserDoc(url,null, userCredential.user.uid)
                         addtoGroup(null,null, userCredential.user.uid)
+                        dispatch({type:'signUp',payload:true})
                         navigate('/');      
                         setErrorMessage('')      
                         setLoading(false)
@@ -68,7 +88,8 @@ function SignUpAuth() {
                     console.log(userCredential.user);
                     addUserDoc(null,null, userCredential.user.uid)
                     addtoGroup(null,null, userCredential.user.uid)
-                    navigate('/');  
+                    dispatch({type:'signUp',payload:true})
+                    navigate('/');      
                     setErrorMessage('')          
                 }).catch((error) => {
                     setErrorMessage(error.message)          
@@ -79,9 +100,10 @@ function SignUpAuth() {
         const provider = new GoogleAuthProvider();
         signInWithPopup(auth, provider)
             .then((result) => {
-                addUserDoc(result.user.photoURL,result.user.displayName, result.user.uid)
+                addByGoogle(result.user.photoURL,result.user.displayName, result.user.uid)
                 addtoGroup(null,null, result.user.uid)
-                navigate('/')
+                dispatch({type:'signUp',payload:true})
+                navigate('/');      
                 setErrorMessage('')
                 // console.log(result.user);
             })

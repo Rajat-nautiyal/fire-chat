@@ -1,7 +1,6 @@
 import React from 'react';
 import { useState, useContext , useEffect} from 'react';
 import { useMediaQuery } from '@react-hook/media-query';
-import {DataProvider} from '../contextFile/dataProvider.js'
 import {Chatroom} from './chatroom.js'
 import { Navbar } from './navbar.js'
 import {TopHeader} from './Topheader.js'
@@ -21,7 +20,7 @@ export const Home =()=>{
     },[state.isBacked])
     return(
         <>
-                <div className='wholeStruc'>
+                <div id= {state.mode?"togWholeStruc" : "none"} className='wholeStruc'>
                     <TopHeader/> 
                     <div id='sideNchat'>
                     {isMobile?(<><div style={isBacked?{display:'flex',height:'100%',width:'100%'}:{display:'none',opacity:'0'}}><Sidebar /></div>

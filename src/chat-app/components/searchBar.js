@@ -1,12 +1,12 @@
-import { arrayUnion, getDoc, updateDoc } from 'firebase/firestore';
+import { arrayUnion, updateDoc } from 'firebase/firestore';
 import {useContext, useState, useEffect} from 'react'
-import {setDoc, collection, doc , where, serverTimestamp} from 'firebase/firestore';
+import {setDoc, collection, doc , serverTimestamp} from 'firebase/firestore';
 import {auth, firestore} from '../firebase'
 import {AllUserContext} from '../contextFile/dataContext.js'
 import '../chat.css/home.css'
 
 export const SearchBar =()=> {
-    const {allUserData, messageData, state, dispatch} = useContext(AllUserContext);
+    const {allUserData, state, dispatch} = useContext(AllUserContext);
 
     const[searchName, setSearchName] = useState('');
     const[foundedName , setFoundedName] = useState('');

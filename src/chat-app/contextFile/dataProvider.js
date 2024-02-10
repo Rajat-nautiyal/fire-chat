@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { getDocs, collection, onAuthStateChanged } from 'firebase/firestore';
+import { getDocs, collection } from 'firebase/firestore';
 import { auth, firestore } from '../firebase';
 import { AllUserContext } from './dataContext.js';
 import { useReducer } from 'react';
@@ -45,7 +45,8 @@ export const DataProvider = ({ children }) => {
       userId:'',
       groupId:'',
       bool:null,
-      isBacked:true
+      isBacked:true,
+      signUp:null
     }
 
     const modeReducer = (state, action) => {
@@ -56,6 +57,11 @@ export const DataProvider = ({ children }) => {
           return {
             ...state,  // Include the existing state
             mode: action.payload,
+          };
+        case 'signUp':
+          return {
+            ...state,  
+            signUp: action.payload,
           };
         case 'chatId':
           return {
@@ -100,11 +106,11 @@ export const DataProvider = ({ children }) => {
 
   useEffect(() => {
     FetchData();
-  }, [state.chatId,state.searchId]);
+  }, [state.signUp,state.chatId,state.searchId]);
 
   useEffect(() => {
     messCollec();  
-  }, [state.chatId, state.bool]);
+  }, [state.signUp,state.chatId, state.bool]);
 
 
   return (

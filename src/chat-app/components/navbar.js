@@ -1,6 +1,6 @@
 import { useEffect, useState, useContext } from 'react';
 import { useMediaQuery } from '@react-hook/media-query';
-import {auth , firestore, storage} from '../firebase.js';
+import {auth} from '../firebase.js';
 import {AllUserContext} from '../contextFile/dataContext.js'
 import { BiArrowBack } from "react-icons/bi";
 import '../chat.css/navbar.css'
@@ -42,14 +42,14 @@ export const Navbar =()=>{
     
     useEffect(()=>{
         nameNpic() 
-    },[state.chatId, allUserData,state.groupId]) 
+    },[allUserData,state.signUp,state.chatId,state.groupId]) 
 
     useEffect(() => {
         const currentUserDoc = usersData.find(user => user.user_id === auth.currentUser.uid);
         if (currentUserDoc) {
           setCurrentUserPic(currentUserDoc.photoUrl);
         }
-      }, [allUserData]);
+      }, [allUserData,state.signUp,state.chatId,state.searchId]);
     
     return(
         <>

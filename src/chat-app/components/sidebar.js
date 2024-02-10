@@ -18,6 +18,7 @@ export const Sidebar =()=>{
     const currentUserData = allUserData.find(user => user.user_id == currentUserId)
     const messageCollecRef = collection(firestore, `messages`);
     const groupRef = collection(firestore, 'groups')
+    const groupPic = `https://firebasestorage.googleapis.com/v0/b/fir-chatapp-82a43.appspot.com/o/chat_pics%2Fmessages%2FScreenshot%202024-01-29%20085754.png?alt=media&token=1f9c3b66-8390-421a-91d6-1d58927a60db`
 
     const accessFriend =async()=>{
             if (currentUserData){
@@ -31,11 +32,13 @@ export const Sidebar =()=>{
                     })
                     setMesCollec(messageCollecArray)  
                 })
-                const groupDoc = doc(groupRef,'AenyHhj56yKLx6v2hMnt')
-                const groupData = await getDoc(groupDoc)              
-                // console.log(groupData.data())  
-                setGroup(groupData.data())  
             }else return
+        }
+        const groupFun = async()=>{
+            const groupDoc = doc(groupRef,'AenyHhj56yKLx6v2hMnt')
+            const groupData = await getDoc(groupDoc)              
+            // console.log(groupData.data())  
+            setGroup(groupData.data())  
         }
             
         const dischargeId =(id)=>{
@@ -50,7 +53,11 @@ export const Sidebar =()=>{
         
         useEffect(()=>{
              accessFriend() 
-        },[state.chatId,messageData]) 
+        },[state.signUp,state.chatId,messageData]) 
+
+        useEffect(()=>{
+            groupFun() 
+       },[state.signUp]) 
 
         
         return(
@@ -81,7 +88,7 @@ export const Sidebar =()=>{
             <div id ='upperFriend' onClick={goToChat}>
                 <div onClick={() => dischargeGroupId('AenyHhj56yKLx6v2hMnt')} 
                     id= {state.mode?"togFrndDark" : "nothing"} className="friends">                    
-                    <img src = {group.groupPic} className="sidebar-image" />
+                    <img src = {groupPic} className="sidebar-image" />
                     <div style={{display: 'flex',alignItems: 'center'}}>{group.groupName}</div>
                     <div className="lastMessage">
                         {group.lastMessage}
