@@ -6,7 +6,7 @@ A real-time chat application built using React and Firebase, deployed using Fire
 
 - **Real-time Messaging:** real-time communications
 - **User Authentication:** Secure sign-in and sign-out functionality using Firebase Authentication techniques.
-- 
+  
 ## Demo
 
 Check out the live demo https://fir-chatapp-82a43.web.app/
