@@ -54,35 +54,6 @@ Check out the live demo https://fir-chatapp-82a43.web.app/
 
 2. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-## Deployment
-
-This project is deployed using Firebase Hosting. Follow these steps to deploy your own version:
-
-1. Install Firebase CLI:
-    ```bash
-    npm install -g firebase-tools
-    ```
-
-2. Log in to Firebase:
-    ```bash
-    firebase login
-    ```
-
-3. Initialize Firebase in your project:
-    ```bash
-    firebase init
-    ```
-
-4. Build the project:
-    ```bash
-    npm run build
-    ```
-
-5. Deploy to Firebase:
-    ```bash
-    firebase deploy
-    ```
-
 ## Contributing
 
 Contributions are welcome! Please fork the repository and use a feature branch. Pull requests are warmly welcome.
