@@ -22,7 +22,7 @@ Check out the live demo https://fir-chatapp-82a43.web.app/
 
 1. Clone the repository:
     ```bash
-    git clone [https://github.com/Rajat-nautiyal/ChatApp.git](https://github.com/Rajat-nautiyal/fire-chat.git)
+    git clone https://github.com/Rajat-nautiyal/fire-chat.git
     cd ChatApp
     ```
 
